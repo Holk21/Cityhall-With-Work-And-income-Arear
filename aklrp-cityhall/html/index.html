@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work And Income</title>
+  <link rel="stylesheet" href="style.css?v=1.3.0-winz-view" />
+</head>
+<body>
+  <div id="app" class="hidden">
+    <div class="device">
+      <div class="bezel">
+        <div class="camera-notch"><span class="cam-dot"></span></div>
+        <div class="screen">
+          <div class="tablet">
+            <div class="statusbar">
+              <div class="sb-left">9:41</div>
+              <div class="sb-center">Work And Income</div>
+              <div class="sb-right">▱▱▱</div>
+            </div>
+            <div class="topbar">
+              <div class="title">
+                Work And Income
+                <span id="version-tag" style="opacity:.6;font-size:12px;margin-left:8px;">
+                  1.3.0-winz-view
+                </span>
+              </div>
+              <div class="actions">
+                <button id="btn-close" class="btn close">✕</button>
+              </div>
+            </div>
+            <div class="tabs">
+              <button data-tab="jobs" class="tab active">Jobs</button>
+              <button data-tab="licenses" class="tab">Licenses</button>
+              <button data-tab="idcard" class="tab">ID Card</button>
+              <button data-tab="winz" class="tab">WINZ</button>
+              <button data-tab="winzadmin" id="tab-admin-btn" class="tab" style="display:none">
+                WINZ Admin
+              </button>
+            </div>
+            <div class="content">
+              <section id="tab-jobs" class="tabpane show">
+                <div id="jobs-list" class="grid"></div>
+              </section>
+
+              <section id="tab-licenses" class="tabpane">
+                <div class="card">
+                  <h3>Driver License</h3>
+                  <p>Buy your driver license.</p>
+                  <div class="payrow">
+                    <button class="btn" data-buy="driver_license" data-pay="cash">Pay Cash</button>
+                    <button class="btn" data-buy="driver_license" data-pay="bank">Pay Bank</button>
+                    <span class="price" id="price-driver"></span>
+                  </div>
+                </div>
+              </section>
+
+              <section id="tab-idcard" class="tabpane">
+                <div class="card">
+                  <h3>Government ID Card</h3>
+                  <p>Purchase a replacement ID card.</p>
+                  <div class="payrow">
+                    <button class="btn" data-buy="id_card" data-pay="cash">Pay Cash</button>
+                    <button class="btn" data-buy="id_card" data-pay="bank">Pay Bank</button>
+                    <span class="price" id="price-id"></span>
+                  </div>
+                </div>
+              </section>
+
+              <!-- WINZ Application -->
+              <section id="tab-winz" class="tabpane">
+                <div class="card">
+                  <h3>WINZ Application</h3>
+                  <p>Select the grant type and complete the fields below.</p>
+
+                  <form id="winz-unified-form" class="form">
+                    <label>Grant Type
+                      <select id="grant-type" name="type" required>
+                        <option value="food" selected>Food Grant</option>
+                        <option value="money">Money Grant</option>
+                      </select>
+                    </label>
+
+                    <label>Full Name
+                      <input type="text" name="fullname" maxlength="80" required />
+                    </label>
+
+                    <div data-type="food">
+                      <label>Why You Need Food
+                        <textarea name="why" rows="2" maxlength="500"></textarea>
+                      </label>
+                      <label>What Left You Short For Food
+                        <textarea name="cause_food" rows="2" maxlength="500"></textarea>
+                      </label>
+                    </div>
+
+                    <div data-type="money" class="hidden">
+                      <label>Why You Need The Money
+                        <select name="reason">
+                          <option value="" disabled selected>Select a reason</option>
+                          <option>Phone</option>
+                          <option>Car</option>
+                          <option>Clothing</option>
+                          <option>Power</option>
+                          <option>Rent</option>
+                        </select>
+                      </label>
+                      <label>What Has Left You Short
+                        <textarea name="cause_money" rows="2" maxlength="500"></textarea>
+                      </label>
+                    </div>
+
+                    <label>Amount Needed ($)
+                      <input type="number" min="1" max="50000" name="amount" required />
+                    </label>
+
+                    <div class="payrow">
+                      <button type="submit" class="btn">Submit Application</button>
+                    </div>
+                  </form>
+
+                  <div id="winz-unified-result" class="muted"></div>
+                </div>
+              </section>
+
+              <!-- WINZ Admin -->
+              <section id="tab-winzadmin" class="tabpane">
+                <div class="card">
+                  <h3>WINZ Admin</h3>
+                  <div class="payrow">
+                    <div class="btn" id="filter-food">Food</div>
+                    <div class="btn" id="filter-money">Money</div>
+                    <div class="btn" id="filter-pending">Pending</div>
+                    <div class="btn" id="filter-approved">Approved</div>
+                    <div class="btn" id="filter-denied">Denied</div>
+                    <button id="refresh-pending" class="btn" style="margin-left:auto">Refresh</button>
+                  </div>
+                  <div id="admin-list" class="list"></div>
+                  <div id="admin-detail" class="card hidden" style="margin-top:12px"></div>
+                </div>
+              </section>
+            </div>
+
+            <div class="home-indicator"></div>
+          </div>
+        </div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+  </div>
+
+  <script src="app.js?v=1.3.0-winz-view"></script>
+</body>
+</html>
