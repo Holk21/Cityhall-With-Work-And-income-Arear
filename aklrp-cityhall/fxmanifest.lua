@@ -1,10 +1,11 @@
 fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
 name 'aklrp-cityhall'
-author 'Braiden Marshall (modified)'
-description 'City Hall / WINZ for QBCore: job selection, buy licenses/ID card, and Food Grant applications. (With webhooks + debug)'
-version '1.3.0-debug'
+author 'Braiden Marshall (modified for Qbox/QBCore + ox_target/qb-target by ChatGPT)'
+description 'City Hall / WINZ for Qbox & QBCore with ox_target/qb-target support'
+version '1.4.0'
 
 ui_page 'html/index.html'
 
@@ -13,8 +14,6 @@ files {
   'html/style.css',
   'html/app.js'
 }
-
-shared_script 'config.lua'
 
 client_scripts {
   'client/main.lua'
@@ -25,7 +24,6 @@ server_scripts {
   'server/main.lua'
 }
 
-dependencies {
-  'qb-core',
-  'qb-target'
-}
+-- Don’t hard-require target resources so either one can be used.
+-- Keep core optional too: we detect qbx_core or qb-core at runtime.
+-- dependencies { 'oxmysql' }
